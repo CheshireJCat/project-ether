@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://gate_player"]
+
+[ext_resource type="Script" path="res://scripts/world/player.gd" id="1_player"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 18.0
+
+[sub_resource type="Gradient" id="Gradient_player"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(0.847059, 0.952941, 0.862745, 1, 0.14902, 0.54902, 0.407843, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_player"]
+gradient = SubResource("Gradient_player")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_body")
+
+[node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = SubResource("GradientTexture2D_player")
+scale = Vector2(0.7, 0.7)
+
+[node name="FacingLine" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 32, 0)
+width = 4.0
+default_color = Color(0.972549, 0.956863, 0.764706, 1)
+
+[node name="NameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -60.0
+offset_top = -52.0
+offset_right = 60.0
+offset_bottom = -28.0
+horizontal_alignment = 1
+text = "Player"

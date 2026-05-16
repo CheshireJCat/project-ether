@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "ether_sense",
+      "name": "灵质感知",
+      "description": "感知周围灵质流向，为后续要害判定提供基础。",
+      "cost": 1,
+      "requires": []
+    },
+    {
+      "id": "swift_step",
+      "name": "疾步",
+      "description": "提升短距离移动控制，Phase 2 可接入翻滚。",
+      "cost": 1,
+      "requires": ["ether_sense"]
+    },
+    {
+      "id": "vital_read",
+      "name": "要害读解",
+      "description": "显示目标背向夹角与破绽窗口。",
+      "cost": 2,
+      "requires": ["ether_sense"]
+    },
+    {
+      "id": "spirit_guard",
+      "name": "护体",
+      "description": "稳定自身灵质，降低被普通攻击击退的概率。",
+      "cost": 2,
+      "requires": ["ether_sense"]
+    },
+    {
+      "id": "back_strike",
+      "name": "背击",
+      "description": "从目标背后命中时触发无视等级差的要害伤害。",
+      "cost": 3,
+      "requires": ["vital_read", "swift_step"]
+    }
+  ]
+}

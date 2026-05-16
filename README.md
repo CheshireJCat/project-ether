@@ -27,15 +27,50 @@
 ## 🗺️ 项目迭代规划 (Roadmap)
 
 ### 📌 Phase 1: 基础设施与数据可视化（当前阶段）
-- [ ] **局域网大厅**: 实现本地多实例（Multi-Instance）一键开房与加入。
-- [ ] **全息启动界面**: 还原动画风格的登录与角色创建（六大系别选择）。
-- [ ] **RPG 数值底座**: 建立玩家属性面板、经验升级公式，支持局域网状态实时同步。
-- [ ] **JSON 技能树**: 动态加载的有向无环图（DAG）技能解锁系统。
+- [x] **局域网大厅**: 实现本地多实例（Multi-Instance）一键开房与加入。
+- [x] **全息启动界面**: 还原动画风格的登录与角色创建（六大系别选择）。
+- [x] **RPG 数值底座**: 建立玩家属性面板、经验升级公式，支持局域网状态实时同步。
+- [x] **JSON 技能树**: 动态加载的有向无环图（DAG）技能解锁系统。
 
 ### 📌 Phase 2: 即时动作与高精度判定（下一阶段）
 - [ ] **8方向移动控制器**: 包含带无敌帧的翻滚与动态朝向向量（Facing Radians）。
 - [ ] **无头物理验证**: 房主端权威计算攻击判定框（Hitbox）。
 - [ ] **要害判定系统**: 基于攻击向量与目标朝向夹角的计算，实现“无视防御/等级差”的致命背击伤害。
+
+---
+
+## 🧱 Phase 1 项目结构
+
+```text
+project.godot
+autoload/
+  game_state.gd          # 角色资料、六大系别、等级/经验公式
+  network_manager.gd     # ENet 开房/加入、稳定 RPC 入口、资料同步
+data/
+  skill_tree.json        # DAG 技能树数据
+scenes/
+  Main.tscn              # 根场景与场景切换
+  ui/
+    BootScene.tscn       # LAN 开房/加入 UI
+    CharacterCreation.tscn
+    CharacterSheet.tscn
+    SkillTree.tscn
+  world/
+    World.tscn           # 玩家生成、HUD、面板挂载
+    Player.tscn          # CharacterBody2D 玩家体
+scripts/
+  main.gd
+  ui/
+    boot_scene.gd
+    character_creation.gd
+    character_sheet.gd
+    skill_tree.gd
+  world/
+    world.gd
+    player.gd
+```
+
+Phase 1 的网络边界是：客户端提交角色资料和输入，房主作为服务器生成玩家、推进移动、同步位置与朝向。`Player` 已保留 `facing_radians`，后续可直接接入背击/要害判定的向量夹角计算。
 
 ---
 
